@@ -1,6 +1,7 @@
 package Models;
 
 import Models.HomePageActions;
+import Models.CadastroMedico;
 import Models.SideBar;
 import Styles.Theme;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
@@ -34,9 +36,16 @@ public class ProgramLayout extends JPanel {
 		setMinimumSize(new Dimension(600, 400));
 		
 		//DECLARATIONS
+		//Components
 		JSplitPane splitPane = new JSplitPane();
 		HomePageActions homeActions = new HomePageActions();
 		SideBar sideBar = new SideBar();
+		//Screens
+		GerenciarConsultaActions gerenciarConsulta = new GerenciarConsultaActions();
+		GerenciarFuncionarioActions gerenciarFuncionario = new GerenciarFuncionarioActions();
+		CadastroMedico cadastroMedico = new CadastroMedico();
+		
+		
 		
 		//TOOLBAR AND SPLIT PANE GROUP CONFIGS
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -51,8 +60,10 @@ public class ProgramLayout extends JPanel {
 		setLayout(groupLayout);
 		
 		
-		//SPLIT PANE RIGHT COMPONENT CONFIGS
+		//SETTING SPLIT PANE RIGHT COMPONENT CONFIGS
 		splitPane.setRightComponent(homeActions);
+		splitPane.getLeftComponent().setMinimumSize(new Dimension(550, splitPane.getSize().height));
+		splitPane.getLeftComponent().setMaximumSize(new Dimension(850, splitPane.getSize().height));
 		
 		//SPLIT PANE LEFT COMPONENT CONFIGS
 		splitPane.setLeftComponent(sideBar);
@@ -62,6 +73,52 @@ public class ProgramLayout extends JPanel {
 		//SPLIT PANEL DIVISOR CONFIGS
 		splitPane.setEnabled(false);
 		splitPane.setDividerSize(0);;
+		
+		//BUTTONS BEHAVIOR
+		//Gerenciar Consultas Click
+		Component gerenciarConsultas = homeActions.getComponent(1);
+		gerenciarConsultas.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	splitPane.setRightComponent(gerenciarConsulta);
+		        splitPane.revalidate(); 
+		        splitPane.repaint();
+		    }
+		});
+		
+		//Gerenciar Funcionarios Click
+		Component gerenciarFuncionarios = homeActions.getComponent(3);
+		gerenciarFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		    	splitPane.setRightComponent(gerenciarFuncionario);
+		        splitPane.revalidate(); 
+		        splitPane.repaint();
+			}
+		});
+		
+		//CADASTRAR MEDICO CLICK
+		Component cadastrarMedico = gerenciarFuncionario.getComponent(1);
+		cadastrarMedico.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				splitPane.setRightComponent(cadastroMedico);
+		        splitPane.revalidate(); 
+		        splitPane.repaint();
+			}
+		});
+		
+		//Home Left Pane Click
+		Component homeButton = sideBar.getComponent(4);
+		homeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				splitPane.setRightComponent(homeActions);
+				splitPane.revalidate();
+				splitPane.repaint();
+			}
+		});
+		
 		
 	}
 }

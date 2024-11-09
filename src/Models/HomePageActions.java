@@ -1,58 +1,67 @@
 package Models;
 
 import javax.swing.JPanel;
+import Models.ProgramLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.Font;
-import Models.HomePageActionButtons;
+import java.awt.Insets;
+import Styles.HomePageActionButton;
+import Styles.Icons;
 import Styles.Theme;
+import java.awt.Rectangle;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 //FILE THAT CONTAINS ALL BUTTONS AND ACTIONS OF THE MAIN PAGE MAIN AREA
 
 public class HomePageActions extends JPanel {
 	public HomePageActions() {
 		//PANEL SETTINGS
+		setSize(830, 600);
+		setMinimumSize(new Dimension(400, 400));
+		setPreferredSize(new Dimension(588, 400));
 		setForeground(new Color(255, 255, 255));
 		setFont(new Font("Inter", Font.PLAIN, 12));
 		setBackground(Theme.PAGE_BACKGROUND_COLOR);
-		setLayout(null);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
 		//DECLARING COMPONENTS
-		HomePageActionButtons gerenciarConsultas = new HomePageActionButtons();
-		HomePageActionButtons gerenciarFuncionarios = new HomePageActionButtons();
-		HomePageActionButtons gerenciarExames = new HomePageActionButtons();
-		HomePageActionButtons dadosFinanceiros = new HomePageActionButtons();
+		JLabel title = new JLabel("Página inicial");
+		HomePageActionButton gerenciarConsultas = new HomePageActionButton();
+		HomePageActionButton gerenciarFuncionarios = new HomePageActionButton();
+		HomePageActionButton relatoriosGerais = new HomePageActionButton();
+		HomePageActionButton gerenciarExames = new HomePageActionButton();
 		
 		//COMPONENT SETTINGS
-		gerenciarConsultas.setText("Gerenciar Consultas");
-		gerenciarConsultas.setBounds(10, 11, 194, 150); //Position X,Y,WIDTH,HEIGHT
+		title.setPreferredSize(new Dimension(1000,50));
+		title.setForeground(Theme.TITLE_COLOR);
+		title.setFont(Theme.MAIN_BOLD_FONT_higherSize);
+		title.setHorizontalTextPosition(SwingConstants.CENTER);
+		title.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		gerenciarFuncionarios.setText("Gerenciar Funcionários");
-		gerenciarFuncionarios.setBounds(215, 11, 194, 150); //Position X,Y,WIDTH,HEIGHT 
+		gerenciarConsultas.setPreferredSize(new Dimension(220,170));
+		gerenciarConsultas.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarConsultas)));
 		
-		gerenciarExames.setText("Gerenciar Exames");
-		gerenciarExames.setBounds(419, 11, 194, 150);
+		gerenciarFuncionarios.setPreferredSize(new Dimension(220,170));		gerenciarFuncionarios.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarFuncionarios)));
 		
-		dadosFinanceiros.setText("Dados Financeiros");
-		dadosFinanceiros.setBounds(10, 172, 194, 150);
+		relatoriosGerais.setPreferredSize(new Dimension(220,170));
+		relatoriosGerais.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.relatoriosGerais)));
+		
+		gerenciarExames.setPreferredSize(new Dimension(220,170));
+		gerenciarExames.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarExames)));
 		
 		//Adding components to panel
+		add(title);
 		add(gerenciarConsultas);
-		add(gerenciarFuncionarios);
 		add(gerenciarExames);
-		add(dadosFinanceiros);
+		add(gerenciarFuncionarios);
+		add(relatoriosGerais);
 		
-	}
-	
-	//remover depois
-	
-	public static void main(String[] args) {
-		JFrame frame1 = new JFrame();
-		HomePageActions main = new HomePageActions();
-		
-		frame1.setSize(400,500);
-		frame1.setVisible(true);
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.getContentPane().add(main);
 	}
 }
