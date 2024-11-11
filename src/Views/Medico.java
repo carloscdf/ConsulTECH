@@ -1,7 +1,5 @@
 package Views;
 
-import Views.Funcionario;
-
 public class Medico extends Funcionario {
 	public String crm;
 	public String especialidade;
@@ -16,14 +14,17 @@ public class Medico extends Funcionario {
 		this.horarioAtendimento = horarioAtendimento;
 	}
 	
-	public void ImprimirInformacoes() {
-		System.out.println("NOME: "+nome);
-		System.out.println("CRM: "+this.crm);
-		System.out.println("ESPECIALIDADE: "+this.especialidade);
-		System.out.println("HORARIOS DE ATENDIMENTO: "+this.horarioAtendimento);
-		System.out.println("DATA DE NASCIMENTO: "+dataNascimento);
-		System.out.println("ID CLÍNICA: "+id+"");
-		System.out.println("CPF: "+getCPF());
-		System.out.println("SALÁRIO: "+getSalario());
+	//Getters
+	
+	public String getCrm() {
+		return crm;
+	}
+	
+	public String getEspecialidade() {
+		return especialidade;
+	}
+	
+	public String horarioAtendimento() {
+		return horarioAtendimento;
 	}
 }

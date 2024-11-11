@@ -36,6 +36,7 @@ public class HomePageActions extends JPanel {
 		HomePageActionButton gerenciarConsultas = new HomePageActionButton();
 		HomePageActionButton gerenciarFuncionarios = new HomePageActionButton();
 		HomePageActionButton relatoriosGerais = new HomePageActionButton();
+		HomePageActionButton gerenciarMateriais = new HomePageActionButton();
 		HomePageActionButton gerenciarExames = new HomePageActionButton();
 		
 		//COMPONENT SETTINGS
@@ -53,6 +54,9 @@ public class HomePageActions extends JPanel {
 		relatoriosGerais.setPreferredSize(new Dimension(220,170));
 		relatoriosGerais.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.relatoriosGerais)));
 		
+		gerenciarMateriais.setPreferredSize(new Dimension(220,170));
+		gerenciarMateriais.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarMateriais)));
+		
 		gerenciarExames.setPreferredSize(new Dimension(220,170));
 		gerenciarExames.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarExames)));
 		
@@ -61,6 +65,7 @@ public class HomePageActions extends JPanel {
 		add(gerenciarConsultas);
 		add(gerenciarExames);
 		add(gerenciarFuncionarios);
+		add(gerenciarMateriais);
 		add(relatoriosGerais);
 		
 	}

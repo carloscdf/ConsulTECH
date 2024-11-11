@@ -13,16 +13,24 @@ public class Funcionario {
 		this.id = id;
 	}
 	
-	public String getCPF() {
-		return this.cpf;
+	//Getters
+	
+	public String getNome() {
+		return nome;
 	}
 	
-	public void setCPF(String cpf) {
-		this.cpf = cpf;
+	public String getCPF() {
+		return cpf;
 	}
 	
 	public double getSalario() {
-		return this.salario;
+		return salario;
+	}
+	
+	//Setters
+	
+	public void setCPF(String cpf) {
+		this.cpf = cpf;
 	}
 	
 	public void setSalario(double salario) {

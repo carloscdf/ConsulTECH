@@ -15,4 +15,5 @@ public class Icons {
 	public static final String cadastroEnfermeiro = "/assets/icons/cadastroEnfermeiro.png";
 	public static final String cadastroOutrosFuncionarios = "/assets/icons/cadastroOutrosFuncionarios.png"; 
 	public static final String funcionariosCadastrados = "/assets/icons/funcionariosCadastrados.png";
+	public static final String gerenciarMateriais = "/assets/icons/gerenciarMateriais.png";
 }

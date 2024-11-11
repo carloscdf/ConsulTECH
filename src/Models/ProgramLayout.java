@@ -42,9 +42,9 @@ public class ProgramLayout extends JPanel {
 		SideBar sideBar = new SideBar();
 		//Screens
 		GerenciarConsultaActions gerenciarConsulta = new GerenciarConsultaActions();
+		CadastroPaciente cadastrarPaciente = new CadastroPaciente();
 		GerenciarFuncionarioActions gerenciarFuncionario = new GerenciarFuncionarioActions();
 		CadastroMedico cadastroMedico = new CadastroMedico();
-		
 		
 		
 		//TOOLBAR AND SPLIT PANE GROUP CONFIGS
@@ -62,8 +62,8 @@ public class ProgramLayout extends JPanel {
 		
 		//SETTING SPLIT PANE RIGHT COMPONENT CONFIGS
 		splitPane.setRightComponent(homeActions);
-		splitPane.getLeftComponent().setMinimumSize(new Dimension(550, splitPane.getSize().height));
-		splitPane.getLeftComponent().setMaximumSize(new Dimension(850, splitPane.getSize().height));
+		splitPane.getRightComponent().setMinimumSize(new Dimension(550, splitPane.getSize().height));
+		splitPane.getRightComponent().setMaximumSize(new Dimension(850, splitPane.getSize().height));
 		
 		//SPLIT PANE LEFT COMPONENT CONFIGS
 		splitPane.setLeftComponent(sideBar);
@@ -76,8 +76,8 @@ public class ProgramLayout extends JPanel {
 		
 		//BUTTONS BEHAVIOR
 		//Gerenciar Consultas Click
-		Component gerenciarConsultas = homeActions.getComponent(1);
-		gerenciarConsultas.addMouseListener(new MouseAdapter() {
+		Component gerenciarConsultaBTN = homeActions.getComponent(1);
+		gerenciarConsultaBTN.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
 		    	splitPane.setRightComponent(gerenciarConsulta);
@@ -86,9 +86,19 @@ public class ProgramLayout extends JPanel {
 		    }
 		});
 		
+		Component cadastrarPacienteBTN = gerenciarConsulta.getComponent(1);
+		cadastrarPacienteBTN.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		    	splitPane.setRightComponent(cadastrarPaciente);
+		        splitPane.revalidate(); 
+		        splitPane.repaint();
+			}
+		});
+		
 		//Gerenciar Funcionarios Click
-		Component gerenciarFuncionarios = homeActions.getComponent(3);
-		gerenciarFuncionarios.addMouseListener(new MouseAdapter() {
+		Component gerenciarFuncionarioBTN = homeActions.getComponent(3);
+		gerenciarFuncionarioBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 		    	splitPane.setRightComponent(gerenciarFuncionario);
@@ -97,9 +107,11 @@ public class ProgramLayout extends JPanel {
 			}
 		});
 		
-		//CADASTRAR MEDICO CLICK
-		Component cadastrarMedico = gerenciarFuncionario.getComponent(1);
-		cadastrarMedico.addMouseListener(new MouseAdapter() {
+		
+		
+		//Cadastrar Medico Click
+		Component cadastrarMedicoBTN = gerenciarFuncionario.getComponent(1);
+		cadastrarMedicoBTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				splitPane.setRightComponent(cadastroMedico);
