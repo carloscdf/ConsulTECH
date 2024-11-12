@@ -4,10 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import Models.ProgramLayout;
-import Views.Consulta;
-import Views.Medico;
-import Views.Paciente;
+import Models.Consulta;
+import Models.Medico;
+import Models.Paciente;
+import Views.ProgramLayout;
 
 public class Program extends JFrame {
 	public Program() {
@@ -35,16 +35,16 @@ public class Program extends JFrame {
 		Paciente pessoa1 = new Paciente("Carlos", "45355000", "18/12/2004", "739986540", "O+", 1.65, 70,
 				"Av José Novais", "Centro", 62, "45355000", "Apuarema", "Bahia");
 		Consulta consulta = new Consulta("15/11/2024", "10:30", medico1, pessoa1, "Dor no joelho", "Exame de rotina",
-				"Nenhuma observação adicional");
+				"Nenhuma observação adicional", 140.00);
 		Consulta consulta2 = new Consulta("16/12/2024", "11:30", medico2, pessoa1, "Dor no coração", "Exame de rotina",
-				"Nenhuma observação adicional");
+				"Nenhuma observação adicional", 150.00);
 
 		pessoa1.setHistoricoMedico(consulta);
 		pessoa1.setHistoricoMedico(consulta2);
-
+		
 		consulta.setConvenio(pessoa1.getConvenio());
 		consulta2.setConvenio(pessoa1.getConvenio());
-
+		
 		// Imprimir os dados básicos do paciente
 		System.out.println("Dados do Paciente:");
 		System.out.println("Nome: " + pessoa1.getNome());
@@ -73,6 +73,7 @@ public class Program extends JFrame {
 				System.out.println("Queixa: " + consulta1.getQueixaPaciente());
 				System.out.println("Tipo de Consulta: " + consulta1.getTipoConsulta());
 				System.out.println("Observações: " + consulta1.getObservacoes());
+				System.out.println("Valor: R$" + consulta1.getPreco());
 				System.out.println("--------------------------------------------");
 			}
 		}
