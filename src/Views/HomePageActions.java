@@ -43,7 +43,7 @@ public class HomePageActions extends JPanel {
 		JLabel title = new JLabel("Página inicial");
 		
 		//COMPONENT SETTINGS
-		title.setPreferredSize(new Dimension(1000,50));
+		title.setPreferredSize(new Dimension(3000,50));
 		title.setForeground(Theme.TITLE_COLOR);
 		title.setFont(Theme.MAIN_BOLD_FONT_higherSize);
 		title.setHorizontalTextPosition(SwingConstants.CENTER);
