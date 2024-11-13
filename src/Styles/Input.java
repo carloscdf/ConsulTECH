@@ -11,6 +11,6 @@ public class Input extends JTextField {
 	public Input() {
 		setFont(Theme.MAIN_PLAIN_FONT_mediumSize);
 		setColumns(27);
-		setBorder(BorderFactory.createLineBorder(Theme.TEXT_COLOR, 2));
+		setBorder(BorderFactory.createLineBorder(Theme.LIGHT_BORDER_COLOR));
 	}
 }

@@ -23,6 +23,12 @@ import java.awt.event.MouseEvent;
 //FILE THAT CONTAINS ALL BUTTONS AND ACTIONS OF THE MAIN PAGE MAIN AREA
 
 public class HomePageActions extends JPanel {
+	private HomePageActionButton gerenciarConsultas = new HomePageActionButton();
+	private HomePageActionButton gerenciarFuncionarios = new HomePageActionButton();
+	private HomePageActionButton relatoriosGerais = new HomePageActionButton();
+	private HomePageActionButton gerenciarMateriais = new HomePageActionButton();
+	private HomePageActionButton gerenciarExames = new HomePageActionButton();
+	
 	public HomePageActions() {
 		//PANEL SETTINGS
 		setSize(830, 600);
@@ -35,11 +41,6 @@ public class HomePageActions extends JPanel {
 		
 		//DECLARING COMPONENTS
 		JLabel title = new JLabel("Página inicial");
-		HomePageActionButton gerenciarConsultas = new HomePageActionButton();
-		HomePageActionButton gerenciarFuncionarios = new HomePageActionButton();
-		HomePageActionButton relatoriosGerais = new HomePageActionButton();
-		HomePageActionButton gerenciarMateriais = new HomePageActionButton();
-		HomePageActionButton gerenciarExames = new HomePageActionButton();
 		
 		//COMPONENT SETTINGS
 		title.setPreferredSize(new Dimension(1000,50));
@@ -55,6 +56,7 @@ public class HomePageActions extends JPanel {
 		
 		relatoriosGerais.setPreferredSize(new Dimension(220,170));
 		relatoriosGerais.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.relatoriosGerais)));
+		relatoriosGerais.setEnabled(false);
 		
 		gerenciarMateriais.setPreferredSize(new Dimension(220,170));
 		gerenciarMateriais.setIcon(new ImageIcon(HomePageActions.class.getResource(Icons.gerenciarMateriais)));
@@ -70,5 +72,25 @@ public class HomePageActions extends JPanel {
 		add(gerenciarMateriais);
 		add(relatoriosGerais);
 		
+	}
+	
+	public HomePageActionButton getGerenciarConsultas() {
+		return gerenciarConsultas;
+	}
+	
+	public HomePageActionButton getGerenciarFuncionarios() {
+		return gerenciarFuncionarios;
+	}
+	
+	public HomePageActionButton getRelatoriosGerais() {
+		return relatoriosGerais;
+	}
+	
+	public HomePageActionButton getGerenciarMateriais() {
+		return gerenciarMateriais;
+	}
+	
+	public HomePageActionButton getGerenciarExames() {
+		return gerenciarExames;
 	}
 }

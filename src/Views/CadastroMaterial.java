@@ -32,10 +32,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-public class CadastroMedico extends JPanel {
+public class CadastroMaterial extends JPanel {
 	private GoBackButton goBackBtn = new GoBackButton();
 
-	public CadastroMedico() {
+	public CadastroMaterial() {
 
 		// PANEL SETTINGS
 		setBackground(Theme.PAGE_BACKGROUND_COLOR);
@@ -62,12 +62,12 @@ public class CadastroMedico extends JPanel {
 		formPanelRight.setPreferredSize(new Dimension(269, 213));
 		
 		// TITLE & SUBTITLE SETTINGS
-		JLabel title = new JLabel("Cadastro Médico");
+		JLabel title = new JLabel("Cadastro Material");
 		title.setFont(Theme.MAIN_BOLD_FONT_higherSize);
 		title.setHorizontalAlignment(SwingConstants.LEFT);
 		title.setForeground(Theme.TITLE_COLOR);
 
-		JLabel subtitle = new JLabel("Dados pessoais e profissionais");
+		JLabel subtitle = new JLabel("Dados do material");
 		subtitle.setHorizontalAlignment(SwingConstants.LEFT);
 		subtitle.setFont(Theme.MAIN_PLAIN_FONT_mediumSize);
 		subtitle.setForeground(Theme.TITLE_COLOR);
@@ -75,20 +75,21 @@ public class CadastroMedico extends JPanel {
 		// LABELS AND INPUTS SETTINGS
 		InputLabel nomeLabel = new InputLabel("Nome:*");
 
-		InputLabel crmLabel = new InputLabel("CRM:*");
-		Input crmInput = new Input();
+		InputLabel qtdEstoqueLabel = new InputLabel("CRM:*");
+		qtdEstoqueLabel.setText("Quantidade em estoque:*");
+		Input qtdEstoqueInput = new Input();
 
-		InputLabel especialidadeLabel = new InputLabel("Especialidade:*");
-		Input especialidadeInput = new Input();
+		InputLabel qtdMinEstoqueLabel = new InputLabel("Especialidade:*");
+		qtdMinEstoqueLabel.setText("Quantodade mínima em estoque:*");
+		Input qtdMinEstoqueInput = new Input();
 
-		InputLabel valorConsultaLabel = new InputLabel("Valor da consulta particular:*");
-		Input valorConsultaInput = new Input();
+		InputLabel fornecedorLabel = new InputLabel("Valor da consulta particular:*");
+		fornecedorLabel.setText("Fornecedor:*");
+		Input fornecedorInput = new Input();
 
-		InputLabel contatoLabel = new InputLabel("Contato:*");
-		Input contatoInput = new Input();
-
-		InputLabel horarioAtendimentoLabel = new InputLabel("Horários de atendimento:*");
-		Input horarioAtendimentoInput = new Input();
+		InputLabel precoLabel = new InputLabel("Contato:*");
+		precoLabel.setText("Preco:*");
+		Input precoInput = new Input();
 
 		// SUBMIT BUTTON SETTINGS
 
@@ -140,78 +141,71 @@ public class CadastroMedico extends JPanel {
 										GroupLayout.PREFERRED_SIZE))
 						.addGap(73)));
 		GroupLayout gl_formPanelRight = new GroupLayout(formPanelRight);
-		gl_formPanelRight.setHorizontalGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_formPanelRight.createSequentialGroup().addGap(10)
-						.addGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_formPanelRight.createSequentialGroup()
-										.addComponent(horarioAtendimentoInput, GroupLayout.DEFAULT_SIZE, 242,
-												Short.MAX_VALUE)
-										.addContainerGap())
-								.addComponent(valorConsultaLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(contatoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(horarioAtendimentoLabel, GroupLayout.PREFERRED_SIZE, 248,
-										GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, gl_formPanelRight.createSequentialGroup()
-										.addGroup(gl_formPanelRight.createParallelGroup(Alignment.TRAILING)
-												.addComponent(contatoInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-														242, Short.MAX_VALUE)
-												.addComponent(valorConsultaInput, GroupLayout.DEFAULT_SIZE, 242,
-														Short.MAX_VALUE))
-										.addContainerGap()))));
-		gl_formPanelRight.setVerticalGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_formPanelRight.createSequentialGroup().addGap(11)
-						.addComponent(valorConsultaLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(valorConsultaInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(contatoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(contatoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(horarioAtendimentoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10).addComponent(horarioAtendimentoInput, GroupLayout.PREFERRED_SIZE, 25,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(17)));
+		gl_formPanelRight.setHorizontalGroup(
+			gl_formPanelRight.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_formPanelRight.createSequentialGroup()
+					.addGap(10)
+					.addGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_formPanelRight.createSequentialGroup()
+							.addGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
+								.addComponent(fornecedorLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(precoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(precoInput, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+							.addContainerGap())
+						.addGroup(gl_formPanelRight.createSequentialGroup()
+							.addComponent(fornecedorInput, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+							.addGap(10))))
+		);
+		gl_formPanelRight.setVerticalGroup(
+			gl_formPanelRight.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_formPanelRight.createSequentialGroup()
+					.addGap(11)
+					.addComponent(fornecedorLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(fornecedorInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(precoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(precoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(82))
+		);
 		formPanelRight.setLayout(gl_formPanelRight);
 		GroupLayout gl_formPanelLeft = new GroupLayout(formPanelLeft);
-		gl_formPanelLeft.setHorizontalGroup(gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_formPanelLeft.createSequentialGroup().addGap(10).addGroup(gl_formPanelLeft
-						.createParallelGroup(Alignment.LEADING)
-						.addComponent(especialidadeLabel, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-						.addComponent(crmLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)))
-				.addGroup(Alignment.TRAILING,
-						gl_formPanelLeft.createSequentialGroup().addContainerGap()
-								.addComponent(especialidadeInput, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-								.addContainerGap())
-				.addGroup(gl_formPanelLeft.createSequentialGroup().addGap(10)
-						.addGroup(gl_formPanelLeft.createParallelGroup(Alignment.TRAILING)
-								.addComponent(crmInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 242,
-										Short.MAX_VALUE)
-								.addComponent(nomeInput, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-						.addContainerGap()));
-		gl_formPanelLeft.setVerticalGroup(gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_formPanelLeft.createSequentialGroup().addGap(11)
-						.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10).addComponent(nomeInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(crmLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10).addComponent(crmInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(especialidadeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(10)
-						.addComponent(especialidadeInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(17)));
+		gl_formPanelLeft.setHorizontalGroup(
+			gl_formPanelLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_formPanelLeft.createSequentialGroup()
+					.addGroup(gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_formPanelLeft.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
+								.addComponent(qtdEstoqueLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(qtdMinEstoqueLabel, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
+								.addComponent(qtdMinEstoqueInput, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
+						.addGroup(gl_formPanelLeft.createSequentialGroup()
+							.addGap(10)
+							.addGroup(gl_formPanelLeft.createParallelGroup(Alignment.TRAILING)
+								.addComponent(qtdEstoqueInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+								.addComponent(nomeInput, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))))
+					.addContainerGap())
+		);
+		gl_formPanelLeft.setVerticalGroup(
+			gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_formPanelLeft.createSequentialGroup()
+					.addGap(11)
+					.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(nomeInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(qtdEstoqueLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(qtdEstoqueInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(qtdMinEstoqueLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(qtdMinEstoqueInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(17))
+		);
 		formPanelLeft.setLayout(gl_formPanelLeft);
 		secondaryPanel.setLayout(gl_secondaryPanel);
 		setLayout(groupLayout);

@@ -20,6 +20,8 @@ import javax.swing.ImageIcon;
 //FILE THAT CONTAINS ALL BUTTONS AND ACTIONS OF THE MAIN PAGE MAIN AREA
 
 public class GerenciarConsultaActions extends JPanel {
+	private HomePageActionButton cadastroPaciente = new HomePageActionButton();
+	private HomePageActionButton cadastroConsulta = new HomePageActionButton();
 	public GerenciarConsultaActions() {
 		//PANEL SETTINGS
 		setSize(830, 600);
@@ -32,8 +34,6 @@ public class GerenciarConsultaActions extends JPanel {
 		
 		//DECLARING COMPONENTS
 		JLabel title = new JLabel("Gerenciamento de Consultas");
-		HomePageActionButton cadastroPaciente = new HomePageActionButton();
-		HomePageActionButton cadastroConsulta = new HomePageActionButton();
 
 		//COMPONENT SETTINGS
 		title.setPreferredSize(new Dimension(1000,50));
@@ -54,6 +54,14 @@ public class GerenciarConsultaActions extends JPanel {
 		add(cadastroPaciente);
 		add(cadastroConsulta);
 
-		
 	}
+	
+	public HomePageActionButton getCadastroPaciente() {
+		return cadastroPaciente;
+	}
+	
+	public HomePageActionButton getCadastroConsulta() {
+		return cadastroConsulta;
+	}
+	
 }

@@ -1,41 +1,25 @@
 package Views;
 
-import Styles.ActionButton;
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
+
 import Styles.ClearButton;
 import Styles.GoBackButton;
 import Styles.Input;
 import Styles.InputLabel;
 import Styles.SubmitButton;
-import Styles.HomePageActionButton;
 import Styles.Theme;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTextField;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
-
-public class CadastroMedico extends JPanel {
+public class CadastroExame extends JPanel {
 	private GoBackButton goBackBtn = new GoBackButton();
 
-	public CadastroMedico() {
+	public CadastroExame() {
 
 		// PANEL SETTINGS
 		setBackground(Theme.PAGE_BACKGROUND_COLOR);
@@ -62,12 +46,12 @@ public class CadastroMedico extends JPanel {
 		formPanelRight.setPreferredSize(new Dimension(269, 213));
 		
 		// TITLE & SUBTITLE SETTINGS
-		JLabel title = new JLabel("Cadastro Médico");
+		JLabel title = new JLabel("Cadastro Exame");
 		title.setFont(Theme.MAIN_BOLD_FONT_higherSize);
 		title.setHorizontalAlignment(SwingConstants.LEFT);
 		title.setForeground(Theme.TITLE_COLOR);
 
-		JLabel subtitle = new JLabel("Dados pessoais e profissionais");
+		JLabel subtitle = new JLabel("Dados do exame");
 		subtitle.setHorizontalAlignment(SwingConstants.LEFT);
 		subtitle.setFont(Theme.MAIN_PLAIN_FONT_mediumSize);
 		subtitle.setForeground(Theme.TITLE_COLOR);
@@ -75,19 +59,23 @@ public class CadastroMedico extends JPanel {
 		// LABELS AND INPUTS SETTINGS
 		InputLabel nomeLabel = new InputLabel("Nome:*");
 
-		InputLabel crmLabel = new InputLabel("CRM:*");
-		Input crmInput = new Input();
+		InputLabel descricaoLabel = new InputLabel("CRM:*");
+		descricaoLabel.setText("Descrição:*");
+		Input descricaoInput = new Input();
 
-		InputLabel especialidadeLabel = new InputLabel("Especialidade:*");
-		Input especialidadeInput = new Input();
+		InputLabel tipoLabel = new InputLabel("Especialidade:*");
+		tipoLabel.setText("Tipo de exame:*");
+		Input tipoInput = new Input();
 
 		InputLabel valorConsultaLabel = new InputLabel("Valor da consulta particular:*");
 		Input valorConsultaInput = new Input();
 
-		InputLabel contatoLabel = new InputLabel("Contato:*");
-		Input contatoInput = new Input();
+		InputLabel materiaisLabel = new InputLabel("Contato:*");
+		materiaisLabel.setText("Materiais utilizados:*");
+		Input materiaisInput = new Input();
 
-		InputLabel horarioAtendimentoLabel = new InputLabel("Horários de atendimento:*");
+		InputLabel médicoInput = new InputLabel("Horários de atendimento:*");
+		médicoInput.setText("Médico:*");
 		Input horarioAtendimentoInput = new Input();
 
 		// SUBMIT BUTTON SETTINGS
@@ -149,13 +137,13 @@ public class CadastroMedico extends JPanel {
 										.addContainerGap())
 								.addComponent(valorConsultaLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(contatoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								.addComponent(materiaisLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(horarioAtendimentoLabel, GroupLayout.PREFERRED_SIZE, 248,
+								.addComponent(médicoInput, GroupLayout.PREFERRED_SIZE, 248,
 										GroupLayout.PREFERRED_SIZE)
 								.addGroup(Alignment.TRAILING, gl_formPanelRight.createSequentialGroup()
 										.addGroup(gl_formPanelRight.createParallelGroup(Alignment.TRAILING)
-												.addComponent(contatoInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+												.addComponent(materiaisInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
 														242, Short.MAX_VALUE)
 												.addComponent(valorConsultaInput, GroupLayout.DEFAULT_SIZE, 242,
 														Short.MAX_VALUE))
@@ -167,12 +155,12 @@ public class CadastroMedico extends JPanel {
 						.addGap(10)
 						.addComponent(valorConsultaInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(contatoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(materiaisLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(contatoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(materiaisInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(horarioAtendimentoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(médicoInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(10).addComponent(horarioAtendimentoInput, GroupLayout.PREFERRED_SIZE, 25,
 								GroupLayout.PREFERRED_SIZE)
@@ -182,18 +170,18 @@ public class CadastroMedico extends JPanel {
 		gl_formPanelLeft.setHorizontalGroup(gl_formPanelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_formPanelLeft.createSequentialGroup().addGap(10).addGroup(gl_formPanelLeft
 						.createParallelGroup(Alignment.LEADING)
-						.addComponent(especialidadeLabel, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-						.addComponent(crmLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(tipoLabel, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+						.addComponent(descricaoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)))
 				.addGroup(Alignment.TRAILING,
 						gl_formPanelLeft.createSequentialGroup().addContainerGap()
-								.addComponent(especialidadeInput, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+								.addComponent(tipoInput, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
 								.addContainerGap())
 				.addGroup(gl_formPanelLeft.createSequentialGroup().addGap(10)
 						.addGroup(gl_formPanelLeft.createParallelGroup(Alignment.TRAILING)
-								.addComponent(crmInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 242,
+								.addComponent(descricaoInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 242,
 										Short.MAX_VALUE)
 								.addComponent(nomeInput, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
 						.addContainerGap()));
@@ -203,14 +191,14 @@ public class CadastroMedico extends JPanel {
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(10).addComponent(nomeInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(crmLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(descricaoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
-						.addGap(10).addComponent(crmInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addGap(10).addComponent(descricaoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(especialidadeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(tipoLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(especialidadeInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tipoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(17)));
 		formPanelLeft.setLayout(gl_formPanelLeft);
 		secondaryPanel.setLayout(gl_secondaryPanel);

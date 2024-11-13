@@ -16,4 +16,9 @@ public class Icons {
 	public static final String cadastroOutrosFuncionarios = "/assets/icons/cadastroOutrosFuncionarios.png"; 
 	public static final String funcionariosCadastrados = "/assets/icons/funcionariosCadastrados.png";
 	public static final String gerenciarMateriais = "/assets/icons/gerenciarMateriais.png";
+	public static final String leftArrow = "/assets/icons/leftArrow.png";
+	public static final String novoExame = "/assets/icons/novoExame.png";
+	public static final String relatorioExames = "/assets/icons/relatorioExames.png";
+	public static final String novoMaterial = "/assets/icons/novoMaterial.png";
+	public static final String materiaisCadastrados = "/assets/icons/materiaisCadastrados.png";
 }

@@ -3,7 +3,7 @@ package Models;
 import java.util.ArrayList;
 
 public class Paciente extends Pessoa{
-	private ArrayList<Consulta> historicoMedico = new ArrayList<Consulta>();
+	private ArrayList<String> historicoMedico = new ArrayList<String>();
 	private String convenio = "";
 	
 	public Paciente(String nome, String cpf, String dataNascimento, String telefone, String tipoSanguineo,
@@ -15,7 +15,7 @@ public class Paciente extends Pessoa{
 	
 	//Getters
 	
-	public ArrayList<Consulta> getHistoricoMedico(){
+	public ArrayList<String> getHistoricoMedico(){
 		return historicoMedico;
 	}
 	
@@ -25,7 +25,7 @@ public class Paciente extends Pessoa{
 	
 	//Setters
 	
-	public void setHistoricoMedico(Consulta historicoMedico){
+	public void setHistoricoMedico(String historicoMedico){
 		this.historicoMedico.add(historicoMedico);
 	}
 	
