@@ -4,25 +4,41 @@ package Models;
 public class Consulta {
 	private String data;
 	private String hora;
-	private Medico medico;
-	private Paciente paciente;
+	private String medico;
+	private String paciente;
 	private String queixaPaciente;
 	private String tipoConsulta;
 	private String convenio;
 	private String observacoes;
 	private double preco;
-	private Material materiaisUtilizados;
+	private String materiaisUtilizados;
 	
-	public Consulta(String data, String hora, Medico medico, Paciente paciente, String queixaPaciente,
-	String tipoConsulta, String observacoes, double preco) {
+	public Consulta(String data, String hora, String medico, String paciente, String queixaPaciente,
+	String tipoConsulta, String convenio, String observacoes, double preco, String materiaisUtilizados) {
 		this.data = data;
 		this.hora = hora;
 		this.medico = medico;
 		this.paciente = paciente;
 		this.queixaPaciente = queixaPaciente;
 		this.tipoConsulta = tipoConsulta;
+		this.convenio = convenio;
 		this.observacoes = observacoes;
 		this.preco = preco;
+		this.materiaisUtilizados = materiaisUtilizados;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Data: " + data 
+	    		+ "\nHora: " + hora +
+	           "\nMédico: " + medico +
+	           "\nPaciente: " + paciente +
+	           "\nQueixa do paciente: " + queixaPaciente +
+	           "\nTipo da consulta: " + tipoConsulta +
+	           "\nConvênio: " + convenio +
+	           "\nObservações: " + observacoes +
+	           "\nPreço: " + preco +
+	           "\nMateriais utilizados: " + materiaisUtilizados;          
 	}
 	
 	 // Getters
@@ -34,11 +50,11 @@ public class Consulta {
         return hora;
     }
 
-    public Medico getMedico() {
+    public String getMedico() {
         return medico;
     }
 
-    public Paciente getPaciente() {
+    public String getPaciente() {
         return paciente;
     }
 
@@ -62,7 +78,7 @@ public class Consulta {
     	return preco;
     }
     
-    public Material getMateriaisUtilizados() {
+    public String getMateriaisUtilizados() {
     	return materiaisUtilizados;
     }
 
@@ -76,11 +92,11 @@ public class Consulta {
         this.hora = hora;
     }
 
-    public void setMedico(Medico medico) {
+    public void setMedico(String medico) {
         this.medico = medico;
     }
 
-    public void setPaciente(Paciente paciente) {
+    public void setPaciente(String paciente) {
         this.paciente = paciente;
     }
 
@@ -104,7 +120,7 @@ public class Consulta {
     	this.preco = preco;
     }
     
-    public void setMateriaisUtilizados(Material materiaisUtilizados) {
+    public void setMateriaisUtilizados(String materiaisUtilizados) {
     	this.materiaisUtilizados = materiaisUtilizados;
     }
 	

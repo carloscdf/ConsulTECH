@@ -6,10 +6,10 @@ public class Paciente extends Pessoa{
 	private ArrayList<String> historicoMedico = new ArrayList<String>();
 	private String convenio = "";
 	
-	public Paciente(String nome, String cpf, String dataNascimento, String telefone, String tipoSanguineo,
+	public Paciente(String nome, /*String cpf,*/ String dataNascimento, String telefone, String tipoSanguineo,
 			double altura, double peso, String logradouro, String bairro, int numero, String cep, String cidade,
-			String estado) {
-		super(nome, cpf, dataNascimento, telefone, tipoSanguineo, altura, peso, logradouro, bairro, numero, cep, cidade,
+			String estado, String convenio) {
+		super(nome, /*cpf,*/ dataNascimento, telefone, tipoSanguineo, altura, peso, logradouro, bairro, numero, cep, cidade,
 				estado);
 	}
 	
@@ -31,6 +31,25 @@ public class Paciente extends Pessoa{
 	
 	public void setConvenio(String convenio) {
 		this.convenio = convenio;
+	}
+	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder(super.toString());  // Inclui as informações da classe Pessoa
+	    sb.append("\nHistórico Médico: ");
+	    
+	    // Exibe o histórico médico
+	    if (historicoMedico.isEmpty()) {
+	        sb.append("Nenhum histórico médico registrado.");
+	    } else {
+	        for (String historico : historicoMedico) {
+	            sb.append("\n- ").append(historico);
+	        }
+	    }
+	    
+	    sb.append("\nConvênio: ").append(convenio.isEmpty() ? "Nenhum convênio registrado" : convenio);
+	    
+	    return sb.toString();
 	}
 
 }

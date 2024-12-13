@@ -41,5 +41,15 @@ public class Endereco {
 	public String getEstado() {
 		return estado;
 	}
+	
+	  @Override
+	    public String toString() {
+	        return "Número: " + numero +
+	               "\nBairro: " + bairro +
+	               "\nLogradouro: " + logradouro +
+	               "\nCEP: " + cep +
+	               "\nCidade: " + cidade +
+	               "\nEstado: " + estado;
+	    }
 
 }

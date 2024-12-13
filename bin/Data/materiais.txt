@@ -1,0 +1,6 @@
+Nome: Tesoura
+Quantidade mínima: 2
+Quantidade em estoque: 10
+Fornecedor: Tramontina
+Preço: 150.0
+========================================

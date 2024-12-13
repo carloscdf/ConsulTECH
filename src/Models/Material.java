@@ -64,5 +64,13 @@ public class Material {
 		this.qtdEstoqueBaixa = qtdEstoqueBaixa;
 	}
 	
+	@Override
+	public String toString() {
+	    return "Nome: " + nome 
+	    		+ "\nQuantidade mínima: " + quantidadeMinima +
+	           "\nQuantidade em estoque: " + quantidade +
+	           "\nFornecedor: " + fornecedor +
+	           "\nPreço: " + preco;
+	}
 	
 }

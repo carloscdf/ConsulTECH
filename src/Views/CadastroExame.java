@@ -1,14 +1,21 @@
 package Views;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 
+import Models.Exame;
+import Models.Material;
 import Styles.ClearButton;
 import Styles.GoBackButton;
 import Styles.Input;
@@ -25,9 +32,6 @@ public class CadastroExame extends JPanel {
 		setBackground(Theme.PAGE_BACKGROUND_COLOR);
 		setSize(730, 600);
 		setMinimumSize(new Dimension(400, 400));
-
-		// DECLARING VIEWS
-		GerenciarFuncionarioActions gerenciarFuncionarios = new GerenciarFuncionarioActions();
 		
 		// SECONDARY PANEL SETTINGS
 		JPanel secondaryPanel = new JPanel();
@@ -39,7 +43,6 @@ public class CadastroExame extends JPanel {
 		JPanel formPanelLeft = new JPanel();
 		formPanelLeft.setBackground(Theme.BACKGROUND_COLOR);
 		formPanelLeft.setPreferredSize(new Dimension(269, 213));
-		Input nomeInput = new Input();
 		
 		JPanel formPanelRight = new JPanel();
 		formPanelRight.setBackground(Theme.BACKGROUND_COLOR);
@@ -58,31 +61,91 @@ public class CadastroExame extends JPanel {
 
 		// LABELS AND INPUTS SETTINGS
 		InputLabel nomeLabel = new InputLabel("Nome:*");
+		Input nomeInput = new Input();
 
-		InputLabel descricaoLabel = new InputLabel("CRM:*");
+		InputLabel descricaoLabel = new InputLabel("");
 		descricaoLabel.setText("Descrição:*");
 		Input descricaoInput = new Input();
 
-		InputLabel tipoLabel = new InputLabel("Especialidade:*");
+		InputLabel tipoLabel = new InputLabel("");
 		tipoLabel.setText("Tipo de exame:*");
 		Input tipoInput = new Input();
 
-		InputLabel valorConsultaLabel = new InputLabel("Valor da consulta particular:*");
+		InputLabel valorConsultaLabel = new InputLabel("Valor do exame:*");
 		Input valorConsultaInput = new Input();
 
-		InputLabel materiaisLabel = new InputLabel("Contato:*");
+		InputLabel materiaisLabel = new InputLabel("");
 		materiaisLabel.setText("Materiais utilizados:*");
 		Input materiaisInput = new Input();
 
-		InputLabel médicoInput = new InputLabel("Horários de atendimento:*");
-		médicoInput.setText("Médico:*");
-		Input horarioAtendimentoInput = new Input();
+		InputLabel medicoInputLabel = new InputLabel("");
+		medicoInputLabel.setText("Médico:*");
+		Input medicoInput = new Input();
 
 		// SUBMIT BUTTON SETTINGS
 
 		SubmitButton submitBtn = new SubmitButton();
+		
+		submitBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+	                  // Coletando dados do formulário
+                    String nome = nomeInput.getText();
+                    String desc = descricaoInput.getText();
+                    String tipo = tipoInput.getText();
+                    String valorText = valorConsultaInput.getText();
+                    double valor = Double.parseDouble(valorText);
+                    String materiais = materiaisInput.getText();
+                    String medico = medicoInput.getText();
+
+                    // Criando o objeto Material
+                    Exame exame = new Exame(nome, desc, tipo, valor, materiais, medico);
+
+		            // Salvar no arquivo .txt
+		            saveToFile(exame);
+
+		            JOptionPane.showMessageDialog(null, "Dados cadastrados!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    nomeInput.setText("");
+                    descricaoInput.setText("");
+                    tipoInput.setText("");
+                    valorConsultaInput.setText("");
+                    materiaisInput.setText("");
+                    medicoInput.setText("");
+		        } catch (Exception ex) {
+		            // Exibir mensagem de erro com JOptionPane
+		            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados! Confira os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    private void saveToFile(Exame exame) throws Exception {
+		        // Caminho do arquivo
+		        String filePath = "src/Data/exames.txt";
+
+		        // Abrir o arquivo em modo de escrita
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+		            writer.write(exame.toString());  // Escrever os dados do médico
+		            writer.newLine();
+		            writer.write("========================================");
+		            writer.newLine(); 
+		        }
+		    }
+		});
 
 		ClearButton clearBtn = new ClearButton();
+		
+
+		clearBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+                nomeInput.setText("");
+                descricaoInput.setText("");
+                tipoInput.setText("");
+                valorConsultaInput.setText("");
+                materiaisInput.setText("");
+                medicoInput.setText("");
+		    }});
 		
 		//GROUPS
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -132,14 +195,14 @@ public class CadastroExame extends JPanel {
 				.addGroup(gl_formPanelRight.createSequentialGroup().addGap(10)
 						.addGroup(gl_formPanelRight.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_formPanelRight.createSequentialGroup()
-										.addComponent(horarioAtendimentoInput, GroupLayout.DEFAULT_SIZE, 242,
+										.addComponent(medicoInput, GroupLayout.DEFAULT_SIZE, 242,
 												Short.MAX_VALUE)
 										.addContainerGap())
 								.addComponent(valorConsultaLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(materiaisLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(médicoInput, GroupLayout.PREFERRED_SIZE, 248,
+								.addComponent(medicoInputLabel, GroupLayout.PREFERRED_SIZE, 248,
 										GroupLayout.PREFERRED_SIZE)
 								.addGroup(Alignment.TRAILING, gl_formPanelRight.createSequentialGroup()
 										.addGroup(gl_formPanelRight.createParallelGroup(Alignment.TRAILING)
@@ -160,9 +223,9 @@ public class CadastroExame extends JPanel {
 						.addGap(10)
 						.addComponent(materiaisInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(10)
-						.addComponent(médicoInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						.addComponent(medicoInputLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 								GroupLayout.PREFERRED_SIZE)
-						.addGap(10).addComponent(horarioAtendimentoInput, GroupLayout.PREFERRED_SIZE, 25,
+						.addGap(10).addComponent(medicoInput, GroupLayout.PREFERRED_SIZE, 25,
 								GroupLayout.PREFERRED_SIZE)
 						.addGap(17)));
 		formPanelRight.setLayout(gl_formPanelRight);

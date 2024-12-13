@@ -10,6 +10,7 @@ import Styles.HomePageActionButton;
 import Styles.Theme;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -24,11 +25,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Models.Consulta;
+import Models.Material;
+
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
@@ -49,13 +57,11 @@ public class CadastroConsulta extends JPanel {
 		JPanel secondaryPanel =  new JPanel();
 		secondaryPanel.setBackground(Theme.BACKGROUND_COLOR);
 		secondaryPanel.setBorder(BorderFactory.createLineBorder(Theme.LIGHT_BORDER_COLOR));
-
 		
 		//LEFT AND RIGHT INPUT PANELS SETTINGS
 		JPanel formPanelLeft = new JPanel();
 		formPanelLeft.setBackground(Theme.BACKGROUND_COLOR);
 		formPanelLeft.setPreferredSize(new Dimension(269, 213));
-		Input dataInput = new Input();
 		
 		JPanel formPanelRight = new JPanel();
 		formPanelRight.setBackground(Theme.BACKGROUND_COLOR);
@@ -73,43 +79,115 @@ public class CadastroConsulta extends JPanel {
 		subtitle.setForeground(Theme.TITLE_COLOR);
 
 		// LABELS AND INPUTS SETTINGS
-		InputLabel dataLabel = new InputLabel("Nome:*");
+		InputLabel dataLabel = new InputLabel("");
 		dataLabel.setText("Data:*");
+		Input dataInput = new Input();
 
-		InputLabel horaLabel = new InputLabel("CRM:*");
+		InputLabel horaLabel = new InputLabel("");
 		horaLabel.setText("Hora:*");
 		Input horaInput = new Input();
 
-		InputLabel medicoLabel = new InputLabel("Especialidade:*");
+		InputLabel medicoLabel = new InputLabel("");
 		medicoLabel.setText("Médico:*");
 		Input medicoInput = new Input();
 
-		InputLabel tipoLabel = new InputLabel("Valor da consulta particular:*");
+		InputLabel tipoLabel = new InputLabel("");
 		tipoLabel.setText("Tipo de consulta:*");
 		Input tipoInput = new Input();
 
-		InputLabel convenioLabel = new InputLabel("Contato:*");
+		InputLabel convenioLabel = new InputLabel("");
 		convenioLabel.setText("Convênio:*");
 		Input convenioInput = new Input();
 
-		InputLabel observacoesLabel = new InputLabel("Horários de atendimento:*");
+		InputLabel observacoesLabel = new InputLabel("");
 		observacoesLabel.setText("Observações:");
+		Input observacoesInput = new Input();
+		
+		InputLabel pacienteLabel = new InputLabel("");
+		pacienteLabel.setText("Paciente:*");
+		Input pacienteInput = new Input();
+		
+		InputLabel queixaLabel = new InputLabel("");
+		queixaLabel.setText("Queixa do paciente:*");
+		Input queixaInput = new Input();
+		
+		InputLabel materialUtilizadoLabel = new InputLabel("");
+		materialUtilizadoLabel.setText("Material utilizado:");
+		Input materialUtilizadoInput = new Input();
 
 		// SUBMIT BUTTON SETTINGS
 
 		SubmitButton submitBtn = new SubmitButton();
+		
+		submitBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+	                  // Coletando dados do formulário
+                    String data = dataInput.getText();
+                    String hora = horaInput.getText();
+                    String medico = medicoInput.getText();
+                    String paciente = pacienteInput.getText();
+                    String queixaPaciente = queixaInput.getText();
+                    String tipo = tipoInput.getText();
+                    String convenio = convenioInput.getText();
+                    String observacoes = observacoesInput.getText();
+                    String materialUtilizado = materialUtilizadoInput.getText();
+
+                    // Criando o objeto Material
+                    Consulta consulta = new Consulta(data,hora,medico,paciente,queixaPaciente,tipo,convenio,observacoes,0,materialUtilizado);
+
+		            // Salvar no arquivo .txt
+		            saveToFile(consulta);
+
+		            JOptionPane.showMessageDialog(null, "Dados cadastrados!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    dataInput.setText("");
+                    horaInput.setText("");
+                    medicoInput.setText("");
+                    pacienteInput.setText("");
+                    queixaInput.setText("");
+                    tipoInput.setText("");
+                    convenioInput.setText("");
+                    observacoesInput.setText("");
+                    materialUtilizadoInput.setText("");
+		        } catch (Exception ex) {
+		            // Exibir mensagem de erro com JOptionPane
+		            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados! Confira os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    private void saveToFile(Consulta consulta) throws Exception {
+		        // Caminho do arquivo
+		        String filePath = "src/Data/consultas.txt";
+
+		        // Abrir o arquivo em modo de escrita
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+		            writer.write(consulta.toString());  
+		            writer.newLine();
+		            writer.write("========================================");
+		            writer.newLine(); 
+		        }
+		    }
+		});
 
 		ClearButton clearBtn = new ClearButton();
 		
-		InputLabel materialUtilizadoLabel = new InputLabel("Horários de atendimento:*");
-		materialUtilizadoLabel.setText("Material utilizado:");
+		clearBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+                dataInput.setText("");
+                horaInput.setText("");
+                medicoInput.setText("");
+                pacienteInput.setText("");
+                queixaInput.setText("");
+                tipoInput.setText("");
+                convenioInput.setText("");
+                observacoesInput.setText("");
+                materialUtilizadoInput.setText("");
+		    }});
 		
-		Input materialUtilizadoInput = new Input();
 		
-		ClearButton materialUtilizadoSubmit = new ClearButton();
-		materialUtilizadoSubmit.setText("Salvar");
-		
-		Input observacoesInput = new Input();
 		GroupLayout gl_formPanelRight = new GroupLayout(formPanelRight);
 		gl_formPanelRight.setHorizontalGroup(
 			gl_formPanelRight.createParallelGroup(Alignment.LEADING)
@@ -125,19 +203,16 @@ public class CadastroConsulta extends JPanel {
 							.addContainerGap()
 							.addComponent(materialUtilizadoLabel, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_formPanelRight.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(materialUtilizadoInput, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(materialUtilizadoSubmit, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_formPanelRight.createSequentialGroup()
 							.addGap(10)
 							.addGroup(gl_formPanelRight.createParallelGroup(Alignment.TRAILING)
 								.addComponent(convenioInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
 								.addComponent(tipoInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
 							.addGap(17))
-						.addGroup(gl_formPanelRight.createSequentialGroup()
+						.addGroup(Alignment.TRAILING, gl_formPanelRight.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(observacoesInput, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+							.addGroup(gl_formPanelRight.createParallelGroup(Alignment.TRAILING)
+								.addComponent(materialUtilizadoInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+								.addComponent(observacoesInput, GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
 							.addGap(17)))
 					.addGap(0))
 		);
@@ -159,22 +234,12 @@ public class CadastroConsulta extends JPanel {
 					.addGap(15)
 					.addComponent(materialUtilizadoLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_formPanelRight.createParallelGroup(Alignment.BASELINE)
-						.addComponent(materialUtilizadoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(materialUtilizadoSubmit, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGap(23))
+					.addComponent(materialUtilizadoInput, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(25))
 		);
 		formPanelRight.setLayout(gl_formPanelRight);
 		
-		InputLabel pacienteLabel = new InputLabel("Especialidade:*");
-		pacienteLabel.setText("Paciente:*");
 		
-		Input pacienteInput = new Input();
-		
-		InputLabel queixaLabel = new InputLabel("Especialidade:*");
-		queixaLabel.setText("Queixa do paciente:*");
-		
-		Input queixaInput = new Input();
 		GroupLayout gl_formPanelLeft = new GroupLayout(formPanelLeft);
 		gl_formPanelLeft.setHorizontalGroup(
 			gl_formPanelLeft.createParallelGroup(Alignment.LEADING)

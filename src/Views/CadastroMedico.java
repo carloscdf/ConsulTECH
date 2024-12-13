@@ -10,7 +10,13 @@ import Styles.HomePageActionButton;
 import Styles.Theme;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import Models.Endereco;
+import Models.Medico;
+import Models.Paciente;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -24,6 +30,10 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
@@ -93,8 +103,68 @@ public class CadastroMedico extends JPanel {
 		// SUBMIT BUTTON SETTINGS
 
 		SubmitButton submitBtn = new SubmitButton();
+		
+		submitBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+	                  // Coletando dados do formulário
+                    String nome = nomeInput.getText();
+                    String crm = crmInput.getText();
+                    String especialidade = especialidadeInput.getText();
+                    String valorConsultaText = valorConsultaInput.getText();
+                    Double valorConsulta = Double.parseDouble(valorConsultaText);
+                    String contato = contatoInput.getText();
+                    String horarioAtendimento = horarioAtendimentoInput.getText();
+
+                    // Criando o objeto Médico
+                    Medico medico = new Medico(crm, especialidade, nome, horarioAtendimento, contato, valorConsulta);
+
+		            // Salvar no arquivo .txt
+		            saveToFile(medico);
+
+		            JOptionPane.showMessageDialog(null, "Dados cadastrados!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+		            
+                    nomeInput.setText("");
+                    crmInput.setText("");
+                    especialidadeInput.setText("");
+                    valorConsultaInput.setText("");
+                    contatoInput.setText("");
+                    horarioAtendimentoInput.setText("");
+		        } catch (Exception ex) {
+		            // Exibir mensagem de erro com JOptionPane
+		            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados! Confira os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    private void saveToFile(Medico medico) throws Exception {
+		        // Caminho do arquivo
+		        String filePath = "src/Data/medicos.txt";
+
+		        // Abrir o arquivo em modo de escrita
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+		            writer.write(medico.toString());  // Escrever os dados do médico
+		            writer.newLine();
+		            writer.write("========================================");
+		            writer.newLine(); 
+		        }
+		    }
+		});
 
 		ClearButton clearBtn = new ClearButton();
+		
+		clearBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+                    nomeInput.setText("");
+                    crmInput.setText("");
+                    especialidadeInput.setText("");
+                    valorConsultaInput.setText("");
+                    contatoInput.setText("");
+                    horarioAtendimentoInput.setText("");
+                    }
+		        });
 		
 		//GROUPS
 		GroupLayout groupLayout = new GroupLayout(this);

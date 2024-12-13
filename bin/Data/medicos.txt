@@ -1,0 +1,17 @@
+
+Funcionário: 
+Nome: João Carlos
+CRM: 4530BA
+Especialidade: Oncologia
+Horario de Atendimento: 11:50 - 14:00
+Contato: (73) 9 98631415
+Valor da consulta: 150.0
+========================================
+Funcionário: 
+Nome: Rute Barbosa
+CRM: 8575BA
+Especialidade: Cardiologia
+Horario de Atendimento: 14:00
+Contato: (74) 9 98251425
+Valor da consulta: 250.0
+========================================

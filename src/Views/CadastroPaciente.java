@@ -10,7 +10,12 @@ import Styles.HomePageActionButton;
 import Styles.Theme;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import Models.Endereco;
+import Models.Paciente;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Component;
@@ -24,6 +29,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
@@ -70,24 +78,35 @@ public class CadastroPaciente extends JPanel{
 		subtitle.setHorizontalAlignment(SwingConstants.LEFT);
 		subtitle.setFont(Theme.MAIN_PLAIN_FONT_mediumSize);
 		subtitle.setForeground(Theme.TITLE_COLOR);
-
+		
 		// LABELS AND INPUTS SETTINGS
 		InputLabel nomeLabel = new InputLabel("Nome:*");
 
-		InputLabel dataNascimentoLabel = new InputLabel("CRM:*");
+		InputLabel dataNascimentoLabel = new InputLabel("");
 		dataNascimentoLabel.setText("Data de nascimento:*");
 		Input dataNascimentoInput = new Input();
 
-		InputLabel telefoneLabel = new InputLabel("Especialidade:*");
+		InputLabel telefoneLabel = new InputLabel("");
 		telefoneLabel.setText("Telefone:*");
 		Input telefoneInput = new Input();
 
-		InputLabel historicoMedicoLabel = new InputLabel("Contato:*");
+		InputLabel historicoMedicoLabel = new InputLabel("");
 		historicoMedicoLabel.setText("Historico médico:*");
 		Input historicoMedicoInput = new Input();
 
 		InputLabel alturaLabel = new InputLabel("Altura:*");
 		Input alturaInput = new Input();
+		
+		Input pesoInput = new Input();
+		InputLabel pesoLabel = new InputLabel("Peso:*");
+		
+		InputLabel tipoSanguineoLabel = new InputLabel("");
+		tipoSanguineoLabel.setText("Tipo sanguíneo:*");
+		Input tipoSanguineoInput = new Input();
+		
+		InputLabel convenioLabel = new InputLabel("");
+		convenioLabel.setText("Convênio:*");
+		Input convenioInput = new Input();
 		
 		JPanel secondaryPanel_1 = new JPanel();
 		secondaryPanel_1.setBorder(BorderFactory.createLineBorder(Theme.LIGHT_BORDER_COLOR));
@@ -227,7 +246,104 @@ public class CadastroPaciente extends JPanel{
 		
 		ClearButton clearBtn = new ClearButton();
 		
+		clearBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					nomeInput.setText("");
+		            dataNascimentoInput.setText("");
+		            telefoneInput.setText("");
+		            historicoMedicoInput.setText("");  // Histórico médico como texto
+		            alturaInput.setText("");
+		            pesoInput.setText("");
+		            tipoSanguineoInput.setText("");
+		            convenioInput.setText("");
+		           
+		            // setar os dados do endereço
+		            numeroInput.setText("");
+		            bairroInput.setText("");
+		            logradouroInput.setText("");
+		            cepInput.setText("");
+		            cidadeInput.setText("");
+		            estadoInput.setText("");
+			}
+		});
+		
+		
 		SubmitButton submitBtn = new SubmitButton();
+		
+		submitBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            // Capturar os dados do paciente
+		            String nome = nomeInput.getText();
+		            String dataNascimento = dataNascimentoInput.getText();
+		            String telefone = telefoneInput.getText();
+		            String historicoMedicoText = historicoMedicoInput.getText();  // Histórico médico como texto
+		            String alturaText = alturaInput.getText();
+		            double altura = Double.parseDouble(alturaText);  // Converter altura para double
+		            String pesoText = pesoInput.getText();
+		            double peso = Double.parseDouble(pesoText);  // Converter peso para double
+		            String tipoSanguineo = tipoSanguineoInput.getText();
+		            String convenio = convenioInput.getText();
+		            
+		            
+		            // Capturar os dados do endereço
+		            String numero = numeroInput.getText();
+		            String bairro = bairroInput.getText();
+		            String logradouro = logradouroInput.getText();
+		            String cep = cepInput.getText();
+		            String cidade = cidadeInput.getText();
+		            String estado = estadoInput.getText();
+		            
+
+		            // Criar o objeto Endereco
+		            Endereco endereco = new Endereco(logradouro, bairro, Integer.parseInt(numero), cep, cidade, estado);
+
+		            // Criar o objeto Paciente e adicionar histórico médico
+		            Paciente paciente = new Paciente(nome, dataNascimento, telefone, tipoSanguineo, altura, peso, logradouro, bairro, Integer.parseInt(numero), cep, cidade, estado, convenio);
+		            paciente.setHistoricoMedico(historicoMedicoText);  // Adicionando histórico médico
+
+		            // Salvar no arquivo .txt
+		            saveToFile(paciente);
+
+		            JOptionPane.showMessageDialog(null, "Dados cadastrados!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					nomeInput.setText("");
+		            dataNascimentoInput.setText("");
+		            telefoneInput.setText("");
+		            historicoMedicoInput.setText("");  // Histórico médico como texto
+		            alturaInput.setText("");
+		            pesoInput.setText("");
+		            tipoSanguineoInput.setText("");
+		            convenioInput.setText("");
+		           
+		            // setar os dados do endereço
+		            numeroInput.setText("");
+		            bairroInput.setText("");
+		            logradouroInput.setText("");
+		            cepInput.setText("");
+		            cidadeInput.setText("");
+		            estadoInput.setText("");
+		        } catch (Exception ex) {
+		            // Exibir mensagem de erro com JOptionPane
+		            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados! Confira os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    private void saveToFile(Paciente paciente) throws Exception {
+		        // Caminho do arquivo
+		        String filePath = "src/Data/pacientes.txt";
+
+		        // Abrir o arquivo em modo de escrita
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+		            writer.write(paciente.toString());  // Escrever os dados do paciente
+		            writer.newLine();
+		            writer.write("========================================");
+		            writer.newLine(); 
+		        }
+		    }
+		});
 		
 		//GROUPS
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -293,14 +409,8 @@ public class CadastroPaciente extends JPanel{
 					.addContainerGap())
 		);
 		
-		Input pesoInput = new Input();
 		
-		InputLabel pesoLabel = new InputLabel("Peso:*");
 		
-		InputLabel tipoSanguineoLabel = new InputLabel("Contato:*");
-		tipoSanguineoLabel.setText("Tipo sanguíneo:*");
-		
-		Input tipoSanguineoInput = new Input();
 		GroupLayout gl_formPanelRight = new GroupLayout(formPanelRight);
 		gl_formPanelRight.setHorizontalGroup(
 			gl_formPanelRight.createParallelGroup(Alignment.LEADING)
@@ -347,10 +457,7 @@ public class CadastroPaciente extends JPanel{
 		);
 		formPanelRight.setLayout(gl_formPanelRight);
 		
-		InputLabel convenioLabel = new InputLabel("Valor da consulta particular:*");
-		convenioLabel.setText("Convênio:*");
-		
-		Input convenioInput = new Input();
+
 		GroupLayout gl_formPanelLeft = new GroupLayout(formPanelLeft);
 		gl_formPanelLeft.setHorizontalGroup(
 			gl_formPanelLeft.createParallelGroup(Alignment.TRAILING)

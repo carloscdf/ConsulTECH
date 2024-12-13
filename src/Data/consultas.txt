@@ -1,0 +1,11 @@
+Data: 18/12/2023
+Hora: 09:50
+Médico: Josépe
+Paciente: Arlindo
+Queixa do paciente: Tosse
+Tipo da consulta: Exame
+Convênio: Não possui
+Observações: Tosse seca e leve
+Preço: 0.0
+Materiais utilizados: Nenhum
+========================================

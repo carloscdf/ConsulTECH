@@ -1,0 +1,7 @@
+Nome: Endoscopia
+Descrição: Endoscopia alguma coisa
+Tipo de exame: Geral
+Preço: 400.0
+Material utilizado: Cano
+Médico: 
+========================================

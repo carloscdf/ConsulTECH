@@ -10,6 +10,7 @@ import Styles.HomePageActionButton;
 import Styles.Theme;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -24,11 +25,18 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Models.Material;
+import Models.Medico;
+
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
@@ -55,7 +63,7 @@ public class CadastroMaterial extends JPanel {
 		JPanel formPanelLeft = new JPanel();
 		formPanelLeft.setBackground(Theme.BACKGROUND_COLOR);
 		formPanelLeft.setPreferredSize(new Dimension(269, 213));
-		Input nomeInput = new Input();
+		
 		
 		JPanel formPanelRight = new JPanel();
 		formPanelRight.setBackground(Theme.BACKGROUND_COLOR);
@@ -74,28 +82,87 @@ public class CadastroMaterial extends JPanel {
 
 		// LABELS AND INPUTS SETTINGS
 		InputLabel nomeLabel = new InputLabel("Nome:*");
+		Input nomeInput = new Input();
 
-		InputLabel qtdEstoqueLabel = new InputLabel("CRM:*");
+		InputLabel qtdEstoqueLabel = new InputLabel("");
 		qtdEstoqueLabel.setText("Quantidade em estoque:*");
 		Input qtdEstoqueInput = new Input();
 
-		InputLabel qtdMinEstoqueLabel = new InputLabel("Especialidade:*");
-		qtdMinEstoqueLabel.setText("Quantodade mínima em estoque:*");
+		InputLabel qtdMinEstoqueLabel = new InputLabel("");
+		qtdMinEstoqueLabel.setText("Quantidade mínima permitida:*");
 		Input qtdMinEstoqueInput = new Input();
 
-		InputLabel fornecedorLabel = new InputLabel("Valor da consulta particular:*");
+		InputLabel fornecedorLabel = new InputLabel("");
 		fornecedorLabel.setText("Fornecedor:*");
 		Input fornecedorInput = new Input();
 
-		InputLabel precoLabel = new InputLabel("Contato:*");
+		InputLabel precoLabel = new InputLabel("");
 		precoLabel.setText("Preco:*");
 		Input precoInput = new Input();
 
 		// SUBMIT BUTTON SETTINGS
 
 		SubmitButton submitBtn = new SubmitButton();
+		
+		submitBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+	                  // Coletando dados do formulário
+                    String nome = nomeInput.getText();
+                    String quantidadeMinimaText = qtdMinEstoqueInput.getText();
+                    int qtdMinEstoque = Integer.parseInt(quantidadeMinimaText);
+                    String qtdEstoqueText = qtdEstoqueInput.getText();
+                    int qtdEstoque = Integer.parseInt(qtdEstoqueText);
+                    String fornecedor = fornecedorInput.getText();
+                    String precoText = precoInput.getText();
+                    Double preco = Double.parseDouble(precoText);
+
+                    // Criando o objeto Material
+                    Material material = new Material(nome, qtdMinEstoque, qtdEstoque, fornecedor, preco);
+
+		            // Salvar no arquivo .txt
+		            saveToFile(material);
+
+		            JOptionPane.showMessageDialog(null, "Dados cadastrados!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    nomeInput.setText("");
+                    qtdMinEstoqueInput.setText("");
+                    qtdEstoqueInput.setText("");
+                    fornecedorInput.setText("");
+                    precoInput.setText("");
+		        } catch (Exception ex) {
+		            // Exibir mensagem de erro com JOptionPane
+		            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados! Confira os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    private void saveToFile(Material material) throws Exception {
+		        // Caminho do arquivo
+		        String filePath = "src/Data/materiais.txt";
+
+		        // Abrir o arquivo em modo de escrita
+		        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+		            writer.write(material.toString());  // Escrever os dados do médico
+		            writer.newLine();
+		            writer.write("========================================");
+		            writer.newLine(); 
+		        }
+		    }
+		});
 
 		ClearButton clearBtn = new ClearButton();
+		
+		clearBtn.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+	                  // Coletando dados do formulário
+                    nomeInput.setText("");
+                    qtdMinEstoqueInput.setText("");
+                    qtdEstoqueInput.setText("");
+                    fornecedorInput.setText("");
+                    precoInput.setText("");
+		    }});
 		
 		//GROUPS
 		GroupLayout groupLayout = new GroupLayout(this);

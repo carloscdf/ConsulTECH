@@ -8,6 +8,6 @@ import javax.swing.JButton;
 public class SubmitButton extends ActionButton{
 	public SubmitButton() {
 		setText("Salvar");
-		setEnabled(false);
+		setEnabled(true);
 	}
 }
